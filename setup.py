@@ -11,7 +11,7 @@ setup(
     description='Allows to deal with power series which coefficients contain uncertainties',
     classifiers=[
         'Development Status :: 3 - Alpha',
-        'Intended Audience :: Scientists',
+        'Intended Audience :: Science/Research',
         'Topic :: Software Development :: Build Tools',
         # Pick your license as you wish (should match "license" above)
         'License :: OSI Approved :: MIT License',
@@ -24,5 +24,6 @@ setup(
         # 'Programming Language :: Python :: 3.2',
         # 'Programming Language :: Python :: 3.3',
         # 'Programming Language :: Python :: 3.4',
-    ]
+    ],
+    install_requires=['sympy', 'uncertainties'],
 )
