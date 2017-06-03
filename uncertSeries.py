@@ -1,13 +1,12 @@
 #!/usr/bin/python
 # encoding: utf8
 
-__author__ = 'kirienko'
-
 from sympy import Add
 from uncertainties import __version_info__ as uncert_version
-from uncertainties import ufloat, ufloat_fromstr, Variable, AffineScalarFunc
+from uncertainties import ufloat, ufloat_fromstr
+from uncertainties.core import Variable, AffineScalarFunc
 
-if uncert_version < (2, 4):
+if uncert_version < (3, 0):
     raise Warning("Version  %s of uncertanties not supported" % str(uncert_version))
 
 

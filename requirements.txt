@@ -1,2 +1,2 @@
 sympy
-uncertainties
+uncertainties>=3.0
