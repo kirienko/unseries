@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from uncertainties import ufloat
 
-from uncertSeries import Series
+from unseries import Series
 
 
 class TestSeries(TestCase):
@@ -29,4 +29,5 @@ class TestSeries(TestCase):
         z2 = Series(3, {0: ufloat(-1, 0.4), 1: ufloat(-2, .004), 2: ufloat(999, .1)})
         z3 = Series(2, {0: ufloat(0, 0.5), 1: ufloat(0, .005)})
         # FIXME
+        print z3.__eq__(z1 + z2)
         # self.assertEqual(z1 + z2, z3)

@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # encoding: utf8
 
 from sympy import Add
@@ -7,11 +6,12 @@ from uncertainties import ufloat, ufloat_fromstr
 from uncertainties.core import Variable, AffineScalarFunc
 
 if uncert_version < (3, 0):
-    raise Warning("Version  %s of uncertanties not supported" % str(uncert_version))
+    raise Warning("Your version of uncertanties is not supported. Try\n$ sudo pip install uncertainties --upgrade")
 
 
 class Series:
-    """ The class that provides the expansion in powers of g up to the n-th order, taking the error into account.
+    """
+    The class that provides the expansion in powers of g up to the n-th order, taking the error into account.
     """
 
     def __init__(self, n, d={}, name='g', analytic=False):
