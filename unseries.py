@@ -55,7 +55,7 @@ class Series:
         elif isinstance(other, (int, float)):
             tmp[0] += other
         else:
-            print type(self), type(other)
+            print("{} {}".format(type(self), type(other)))
             raise NotImplementedError
         return Series(len(tmp), tmp, name=self.name, analytic=self.analytic)
 
@@ -88,8 +88,8 @@ class Series:
         #     print "other=",other
         #     return 0
         else:
-            print "\nself =", self.gSeries, " type(self) =", type(self)
-            print "\nother =", other, " type(other) =", type(other)
+            print("\nself = {}, type(self) = {}".format(self.gSeries, type(self)))
+            print("\nother = {}, type(other) = {}".format(other, type(other)))
             raise NotImplementedError
         return res
 
@@ -128,7 +128,7 @@ class Series:
         elif isinstance(other, (int, float, Variable, AffineScalarFunc)):
             return self * (1. / other)
         else:
-            raise NotImplementedError("type: %s; %s" % (type(other), other.__repr__()))
+            raise NotImplementedError("type: {}; {}".format(type(other), other.__repr__()))
 
     def __rdiv__(self, other):
         return other * self.__invert__()
@@ -144,7 +144,7 @@ class Series:
             else:
                 return Series(self.n, {0: ufloat(1, 0)}, self.name, analytic=self.analytic)
         else:
-            print "power =", power, " type(power) =", type(power)
+            print("power = {}, type(power) = {}".format(power, type(power)))
             raise NotImplementedError
 
     def diff(self):
@@ -219,16 +219,16 @@ class Series:
         slov = ''
         for k, v in self.gSeries.items():
             slov += "%d: '%s', " % (k, v)
-        print "Series(%d, {%s}, '%s')" % (self.n, slov, self.name)
+        print("Series({}, {}, '{}')".format(self.n, slov, self.name))
 
 
 if __name__ == "__main__":
     Z1 = Series(1)
     Z2 = Series(2, {0: ufloat(-4, 0.3), 1: ufloat(2, .002)})
-    print "Z1 =", Z1
-    print "Z2 =", Z2
-    print "Z2.diff() =", Z2.diff()
-    print "Z2 =", Z2
-    print "1/Z2 =", 1 / Z2
-    print "Z1*Z2 =", Z1 * Z2
-    print "Z2**2 =", Z2 ** 2
+    print("Z1 = {}".format(Z1))
+    print("Z2 = {}".format(Z2))
+    print("Z2.diff() = {}".format(Z2.diff()))
+    print("Z2 = {}".format(Z2))
+    print("1/Z2 = {}".format(1 / Z2))
+    print("Z1*Z2 = {}".format(Z1 * Z2))
+    print("Z2**2 = {}".format(Z2 ** 2))
