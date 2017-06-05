@@ -1,5 +1,8 @@
 from distutils.core import setup
 
+with open('README.rst') as fd:
+    readme = fd.read()
+
 setup(
     name='unseries',
     version='0.0.2',
@@ -9,6 +12,7 @@ setup(
     author='Yury Kirienko',
     author_email='yury.kirienko@gmail.com',
     description='Allows to deal with power series which coefficients contain uncertainties',
+    long_description=readme,
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Science/Research',

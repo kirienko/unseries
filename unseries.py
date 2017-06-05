@@ -20,16 +20,15 @@ class Series:
         self.name = name
         self.analytic = analytic
         for k, v in d.items():
-            try:
-                if isinstance(v, (list, tuple)):
-                    self.gSeries[k] = ufloat(v[0], v[1])
-                elif isinstance(v, str):
-                    self.gSeries[k] = ufloat_fromstr(v)
-                elif isinstance(v, int):
-                    self.gSeries[k] = v
-                    self.analytic = True
-            except:
-                print "Series constructor warning: Type(v)=", type(v)
+            if isinstance(v, (list, tuple)):
+                self.gSeries[k] = ufloat(v[0], v[1])
+            elif isinstance(v, str):
+                self.gSeries[k] = ufloat_fromstr(v)
+            elif isinstance(v, int):
+                self.gSeries[k] = v
+                self.analytic = True
+            else:
+                print("Series constructor warning: Type(v)={}".format(type(v)))  # TODO: raise error
         for i in range(0, n):
             if i not in d.keys():
                 if self.analytic:
