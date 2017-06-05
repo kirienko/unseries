@@ -14,16 +14,16 @@ It is build on top of ``uncertainties`` python package (see `here <https://pypi.
 Scope
 -----
 For now the following fuctions are available:
-* series addition and subtraction
-* comparision (*greater than*, *less than*)
-* series multiplication
-* series inversion, i.e. ``Z(g) --> 1/Z(g)``
-* series division (in the assumption that all powers are non-negative)
-* exponentiation
-* analitic differentiation
-* substitution, i.e. calculation of a series ``Z(g)`` at the point ``g₀`` to a number with uncertainty
-* approximation
-* some technical functions: ``pprint``, ``save`` [to file],
+    - series addition and subtraction
+    - comparision (*greater than*, *less than*)
+    - series multiplication
+    - series inversion, i.e. ``Z(g) ➝ 1/Z(g)``
+    - series division (in the assumption that all powers are non-negative)
+    - exponentiation
+    - analitic differentiation
+    - substitution, i.e. calculation of a series ``Z(g)`` at the point ``g₀`` to a number with uncertainty
+    - approximation
+    - some technical functions: ``pprint``, ``save`` [to file],
 
 Example
 -------
