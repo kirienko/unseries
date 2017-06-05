@@ -3,8 +3,10 @@ unseries
 
 
 .. image:: https://travis-ci.org/kirienko/unseries.svg?branch=master
-:target: https://travis-ci.org/kirienko/unseries
+   :target: https://travis-ci.org/kirienko/unseries
 
+.. image:: https://landscape.io/github/kirienko/unseries/master/landscape.png
+   :target: https://landscape.io/github/kirienko/unseries/master
 
 This package allows to deal with power series which coefficients contain uncertainties.
 
