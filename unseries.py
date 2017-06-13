@@ -106,18 +106,18 @@ class Series:
         res = Series(self.n, {}, self.name, analytic=self.analytic)
         if self.gSeries[0] == 1:
             c = 1.
-            normedSeries = self + Series(self.n, {0: -1}, self.name, analytic=self.analytic)  ## <-- it's -1!
+            normed_series = self + Series(self.n, {0: -1}, self.name, analytic=self.analytic)  # <-- it's -1!
         elif self.gSeries[0] != 0:
             c = 1. / self.gSeries[0]
-            normedSeries = self / self.gSeries[0] + Series(self.n, {0: -1}, self.name,
-                                                           analytic=self.analytic)  ## <-- it's -1!
+            normed_series = self / self.gSeries[0] + Series(self.n, {0: -1}, self.name,
+                                                            analytic=self.analytic)  # <-- it's -1!
         else:
             raise NotImplementedError("no constant term in series: %s" % self.gSeries)
         # if self.gSeries[0] == 1:
         #    tmp = Series(self.gSeries[1:], n = self.n-1, name=self.name)
         #        for i in range(tmp.n):
         for i in range(len(self.gSeries)):
-            res += (-1) ** i * normedSeries ** i
+            res += (-1) ** i * normed_series ** i
         return res * c
 
     def __div__(self, other):

@@ -1,11 +1,11 @@
-from distutils.core import setup
+from setuptools import setup
 
 with open('README.rst') as fd:
     readme = fd.read()
 
 setup(
     name='unseries',
-    version='0.0.2',
+    version='0.0.3',
     packages=[''],
     url='https://github.com/kirienko/unseries',
     license='GPL-3.0',
