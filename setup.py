@@ -6,7 +6,7 @@ with open('README.rst') as fd:
 setup(
     name='unseries',
     version='0.0.4',
-    packages=[''],
+    packages=['.'],
     platforms=['Linux', 'Unix', 'MacOsX', 'Windows'],
     url='https://github.com/kirienko/unseries',
     license='GPL-3.0',
