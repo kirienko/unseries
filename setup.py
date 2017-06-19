@@ -5,7 +5,7 @@ with open('README.rst') as fd:
 
 setup(
     name='unseries',
-    version='0.0.4',
+    version='0.1.0',
     packages=['.'],
     platforms=['Linux', 'Unix', 'MacOsX', 'Windows'],
     url='https://github.com/kirienko/unseries',
