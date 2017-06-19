@@ -23,6 +23,12 @@ class TestSeries(TestCase):
     #     def test_save(self):
     #         self.fail()
 
+    def test_zero_input(self):
+        z0 = Series(1)
+        self.assertEqual(str(z0), '0')
+        self.assertEqual(z0.pprint(), '0')
+        self.assertEqual("{}".format(z0), '0')
+
     def test__add(self):
         z1 = Series(2, {0: ufloat(1, 0.3), 1: ufloat(2, .003)})
         z2 = Series(3, {0: ufloat(-1, 0.4), 1: ufloat(-2, .004), 2: ufloat(999, .1)})

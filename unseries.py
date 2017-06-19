@@ -14,13 +14,15 @@ class Series:
     The class that provides the expansion in powers of g up to the n-th order, taking the error into account.
     """
 
-    def __init__(self, n, d={}, name='g', analytic=False):
+    def __init__(self, n, d={0: 0}, name='g', analytic=False):
         self.n = n
         self.gSeries = d
         self.name = name
         self.analytic = analytic
         for k, v in d.items():
-            if isinstance(v, (list, tuple)):
+            if isinstance(v, AffineScalarFunc):
+                self.gSeries[k] = v
+            elif isinstance(v, (list, tuple)):
                 self.gSeries[k] = ufloat(v[0], v[1])
             elif isinstance(v, str):
                 self.gSeries[k] = ufloat_fromstr(v)
@@ -156,9 +158,8 @@ class Series:
             res[i] = (i + 1) * self.gSeries[i + 1]
         return Series(self.n, res, analytic=self.analytic)
 
-    ## FIXME
-    # def __repr__(self):
-    #    return self.gSeries
+    def __repr__(self):
+        return self.pprint()
 
     ## FIXME
     def _approx(self, other):
@@ -184,7 +185,7 @@ class Series:
                     res += " %s * %s**%s + " % (c.format('S'), self.name, str(g))
             elif c != 0 and g <= self.n and isinstance(c, (int, float)):
                 res += "%s * %s**%s + " % (str(c), self.name, str(g))
-        return res[:-2]
+        return res[:-2] or '0'
 
     def coeffs(self):
         """
@@ -203,7 +204,7 @@ class Series:
                 except AttributeError:
                     this_term = str(c)
                 res += "(%s) * %s**%s + " % (this_term, self.name, str(g))
-        return res[:-2]
+        return res[:-2] or '0'
 
     def __len__(self):
         return len(self.gSeries)
@@ -228,7 +229,7 @@ if __name__ == "__main__":
     print("Z1 = {}".format(Z1))
     print("Z2 = {}".format(Z2))
     print("Z2.diff() = {}".format(Z2.diff()))
-    print("Z2 = {}".format(Z2))
+    print("Z2 - Z2 = {}".format(Z2-Z2))
     print("1/Z2 = {}".format(1 / Z2))
     print("Z1*Z2 = {}".format(Z1 * Z2))
     print("Z2**2 = {}".format(Z2 ** 2))
