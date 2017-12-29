@@ -15,6 +15,17 @@ class Series:
     """
 
     def __init__(self, n, d={0: 0}, name='g', analytic=False):
+        """
+        Example:
+        `z2 = Series(3, {0: ufloat(-1, 0.4), 1: ufloat(-2, .004), 2: ufloat(999, .1)})`
+        will give:
+        Z₂(g) = -1.0(4) - 2.000(4) g + 999.00(10) g²
+
+        :param n: number of the "known" orders, `int`
+        :param d: dictionary with k=powers, v=`ufloat`s
+        :param name: name of the series variable, arbitrary character, default is `'g'`
+        :param analytic: boolean
+        """
         self.n = n
         self.gSeries = d
         self.name = name
@@ -28,9 +39,9 @@ class Series:
                 self.gSeries[k] = ufloat_fromstr(v)
             elif isinstance(v, int):
                 self.gSeries[k] = v
-                self.analytic = True
+                self.analytic = True   # FIXME: even if the only coeff. is `int`, then the all series becomes `analytic`
             else:
-                print("Series constructor warning: Type(v)={}".format(type(v)))  # TODO: raise error
+                raise TypeError("Series constructor warning: Type(v)={}".format(type(v)))
         for i in range(0, n):
             if i not in d.keys():
                 if self.analytic:
