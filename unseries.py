@@ -6,15 +6,17 @@ from uncertainties import ufloat, ufloat_fromstr
 from uncertainties.core import Variable, AffineScalarFunc
 
 if uncert_version < (3, 0):
-    raise Warning("Your version of uncertanties is not supported. Try\n$ sudo pip install uncertainties --upgrade")
+    raise Warning("Your version of uncertanties is not supported. Try\n"
+                  "$ sudo pip install uncertainties --upgrade")
 
 
 class Series:
     """
-    The class that provides the expansion in powers of g up to the n-th order, taking the error into account.
+    The class that provides the expansion in powers of g up to the n-th order,
+    taking the error into account.
     """
 
-    def __init__(self, n, d={0: 0}, name='g', analytic=False):
+    def __init__(self, n, d={0: 0}, name='g', analytic=None):
         """
         Example:
         `z2 = Series(3, {0: ufloat(-1, 0.4), 1: ufloat(-2, .004), 2: ufloat(999, .1)})`
@@ -29,7 +31,6 @@ class Series:
         self.n = n
         self.gSeries = d
         self.name = name
-        self.analytic = analytic
         for k, v in d.items():
             if isinstance(v, AffineScalarFunc):
                 self.gSeries[k] = v
@@ -39,9 +40,15 @@ class Series:
                 self.gSeries[k] = ufloat_fromstr(v)
             elif isinstance(v, int):
                 self.gSeries[k] = v
-                self.analytic = True   # FIXME: even if the only coeff. is `int`, then the all series becomes `analytic`
+                self.analytic = True
             else:
                 raise TypeError("Series constructor warning: Type(v)={}".format(type(v)))
+        if analytic is not None:
+            # XXX: if defined explicitly:
+            self.analytic = bool(analytic)
+        else:
+            # XXX: if all values are ints assume analytic
+            self.analytic = all(map(lambda x: type(x) == int, d.values()))
         for i in range(0, n):
             if i not in d.keys():
                 if self.analytic:
