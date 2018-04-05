@@ -203,7 +203,7 @@ class Series:
                     res += " %s * %s**%s + " % (c.format('S'), self.name, str(g))
             elif c != 0 and g <= self.n and isinstance(c, (int, float)):
                 res += "%s * %s**%s + " % (str(c), self.name, str(g))
-        return res[:-2] or '0'
+        return res[:-3] or '0'
 
     def coeffs(self):
         """
@@ -222,7 +222,7 @@ class Series:
                 except AttributeError:
                     this_term = str(c)
                 res += "(%s) * %s**%s + " % (this_term, self.name, str(g))
-        return res[:-2] or '0'
+        return res[:-3] or '0'
 
     def __len__(self):
         return len(self.gSeries)

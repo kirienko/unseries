@@ -1,3 +1,4 @@
+# encoding: utf8
 import pytest
 from uncertainties import ufloat
 from unseries import Series
@@ -9,6 +10,14 @@ def zero():
     Returns zero series
     """
     return Series(1)
+
+
+@pytest.fixture()
+def one_two_three():
+    """
+    Analytic series: z(g) = 1 + 2g² + 3g⁴
+    """
+    return Series(4, {0: 1, 1: 2, 4: 3})
 
 
 @pytest.fixture()
@@ -25,22 +34,28 @@ def test_zero_input(zero):
     assert [str(zero), zero.pprint(), "{}".format(zero)] == ['0'] * 3
 
 
+def test__eq(zero):
+    # TODO: implement `__eq__` via properly implemented `__repr__`
+    assert str(Series(1)) == str(zero)
+
+
+def test__neg(zero, z1, z2):
+    assert str(zero) == str(-zero)
+    assert str(z1) == str(-(-z1))
+    assert str(z2) == str(-(-z2))
+
+
 def test__add_simple(z1, z2):
     z3 = Series(2, {0: ufloat(0, 0.5), 1: ufloat(0, .005)})
     z12 = z1 + z2
     assert str(z12) == str(z3)
 
 
-def test__eq(zero):
-    # TODO: implement `__eq__` via properly implemented `__repr__`
-    assert str(Series(1)) == str(zero)
-
-
-# def test__add():
-#     z1 = Series(2, {0: ufloat(1, 0.3), 1: ufloat(2, .003)})
-#     z2 = Series(3, {0: ufloat(-1, 0.4), 1: ufloat(-2, .004), 2: ufloat(999, .1)})
-#     z3 = Series(2, {0: ufloat(0, 0.5), 1: ufloat(0, .005)})
-#     assert z1 + z2 == z3
+def test__add():
+    z1 = Series(2, {0: ufloat(1, 0.3), 1: ufloat(2, .003)})
+    z2 = Series(3, {0: ufloat(-1, 0.4), 1: ufloat(-2, .004), 2: ufloat(999, .1)})
+    z3 = Series(2, {0: ufloat(0, 0.5), 1: ufloat(0, .005)})
+    assert z1 + z2 == z3
 
 
 def test__radd(z1, z2):
@@ -59,10 +74,6 @@ def test__mul():
 
 
 def test__rmul():
-    assert False
-
-
-def test__neg():
     assert False
 
 
@@ -104,8 +115,12 @@ def test_coeffs_z4():
     assert z4.coeffs() == [-1, -2, 0, 999, 0]
 
 
-def test_pprint():
-    assert False
+def test_pprint(z1, one_two_three):
+    # FIXME: UTF8 support
+    # print(z1)
+    # assert z1.pprint == "(1.0 ± 0.3) * g**0 + (2.0 ± 0.003) * g**1"
+    # TODO: remove redundant parentheses
+    assert one_two_three.pprint() == "(1) * g**0 + (2) * g**1 + (3) * g**4"
 
 
 def test__str():
